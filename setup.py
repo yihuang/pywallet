@@ -56,5 +56,6 @@ setup(
         'six>=1.8.0',
         'two1>=3.10.8',
         'pycryptodome>=3.6.6',
+        'eth-utils',
     ]
 )

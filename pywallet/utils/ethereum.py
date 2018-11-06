@@ -23,6 +23,7 @@ from two1.bitcoin.utils import rand_bytes
 from two1.crypto.ecdsa_base import Point
 from two1.crypto.ecdsa import ECPointAffine
 from two1.crypto.ecdsa import secp256k1
+from eth_utils import to_checksum_address
 
 bitcoin_curve = secp256k1()
 
@@ -742,7 +743,8 @@ class PublicKey(PublicKeyBase):
             bytes: Base58Check encoded string
         """
         version = '0x'
-        return version + binascii.hexlify(self.keccak[12:]).decode('ascii')
+        addr = version + binascii.hexlify(self.keccak[12:]).decode('ascii')
+        return to_checksum_address(addr)
         # Put the version byte in front, 0x00 for Mainnet, 0x6F for testnet
         # version = bytes([self.TESTNET_VERSION]) if testnet else bytes([self.MAINNET_VERSION])
         # return base58.b58encode_check(version + self.hash160(compressed))
